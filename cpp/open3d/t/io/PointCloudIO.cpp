@@ -84,10 +84,8 @@ bool ReadPointCloud(const std::string &filename,
     } else {
         success = map_itr->second(filename, pointcloud, params);
         if (params.remove_nan_points || params.remove_infinite_points) {
-            utility::LogError(
-                    "remove_nan_points and remove_infinite_points options are "
-                    "unimplemented.");
-            return false;
+            pointcloud.RemoveNonFinitePoints(params.remove_nan_points,
+                                         params.remove_infinite_points);
         }
     }
 
